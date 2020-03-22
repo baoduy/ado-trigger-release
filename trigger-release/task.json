@@ -8,19 +8,27 @@
   "visibility": ["Build", "Release"],
   "author": "Duy",
   "version": {
-    "Major": 1,
+    "Major": 0,
     "Minor": 0,
-    "Patch": 3
+    "Patch": 2
   },
   "instanceNameFormat": "Trigger a Release",
   "inputs": [
     {
-      "name": "replaceInput",
-      "type": "multiLine",
-      "label": "Replaces",
-      "defaultValue": "- => : ",
+      "name": "releaseIdInput",
+      "type": "string",
+      "label": "Release ID",
+      "defaultValue": "",
       "required": true,
-      "helpMarkDown": "Place each replace pattern on difference lines. *Ex `-- => :` this will replace all double-dash '--' to Colon ':'*"
+      "helpMarkDown": "The Release Definition name."
+    },
+    {
+      "name": "releaseStagesInput",
+      "type": "string",
+      "label": "Release Stages",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Target specific release stages (comma separated)."
     }
   ],
   "execution": { "Node": { "target": "index.js" } }

@@ -1,7 +1,6 @@
-import { TaskResult, getInput, getVariables, setResult, setVariable } from 'vsts-task-lib/task';
+import * as task from 'vsts-task-lib/task';
 
-import parsePattern from './parsePattern';
-import replace from './replace';
+import ReleaseManager, { Options } from './ReleaseManager';
 
 export interface ReplacePattern {
   from: string;
@@ -9,45 +8,29 @@ export interface ReplacePattern {
 }
 
 async function run() {
+  console.log('Running trigger-release');
+
   try {
-    //Get variables
-    const allVariables = getVariables();
-    //short by name
-    var sortedArray = allVariables.sort((obj1, obj2) => {
-      if (obj1.name > obj2.name) {
-        return 1;
-      }
+    const releaseDefinitionId = task.getInput('releaseIdInput', true);
+    const environments = task.getInput('releaseStagesInput', true).split(',');
 
-      if (obj1.name < obj2.name) {
-        return -1;
-      }
-      return 0;
+    const options: Options = {
+      azureDevOpsUri: task.getVariable('system.TeamFoundationServerUri'),
+      projectNameOrId: task.getVariable('system.teamProject'),
+      pat: task.getVariable('system.AccessToken')
+    };
+
+    const manager = new ReleaseManager(options);
+
+    environments.forEach(async env => {
+      const rs = await manager.reDeploy(Number(releaseDefinitionId), env);
+      console.log(`The ${rs.name} of ${rs.releaseDefinition.name} had been scheduled.`);
     });
 
-    //input
-    const replaces = getInput('replaceInput', true)
-      .split('\n')
-      .map(parsePattern);
-
-    console.log('Replace patterns:', replaces);
-
-    //Remane variables
-    sortedArray.forEach(element => {
-      const oldName = element.name;
-      const newName = replace(element.name, replaces);
-
-      if (oldName === newName) {
-        //console.log(`${newName} was skipped as the new name is the same.`);
-        return;
-      }
-
-      setVariable(newName, element.value, element.secret);
-      console.log(`Rename ${oldName} => ${newName}`);
-    });
-
-    setResult(TaskResult.Succeeded, '', true);
+    task.setResult(task.TaskResult.Succeeded, '', true);
   } catch (err) {
-    setResult(TaskResult.Failed, err.message);
+    console.error(err);
+    task.setResult(task.TaskResult.Failed, err);
   }
 }
 

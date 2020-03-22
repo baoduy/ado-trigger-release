@@ -6,6 +6,7 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
+    "azure-devops-node-api": "^10.1.0",
     "vsts-task-lib": "^2.7.0"
   },
   "devDependencies": {

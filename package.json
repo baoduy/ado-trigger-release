@@ -10,7 +10,7 @@
     "compile": "tsc -p .",
     "install-lib": "cd trigger-release && npm install",
     "update-lib": "cd trigger-release && npm run install",
-    "test": "npm run compile && mocha tests/_suite.js",
+    "test": "npm run compile && mocha trigger-release/tests/_suite.js",
     "update": "ncu -u && npm install"
   },
   "devDependencies": {
