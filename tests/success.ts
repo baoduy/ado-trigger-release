@@ -1,7 +1,7 @@
 import * as mock from 'azure-pipelines-task-lib/mock-run';
 import * as path from 'path';
 
-const taskPath = path.join(__dirname, '../remaneVariables', 'index.js');
+const taskPath = path.join(__dirname, '../trigger-release', 'index.js');
 console.log(taskPath);
 
 const tmr = new mock.TaskMockRunner(taskPath);

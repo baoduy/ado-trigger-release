@@ -8,8 +8,8 @@
     "publish-local": "tfx extension publish --no-wait-validation",
     "clean": "rimraf ./*.vsix",
     "compile": "tsc -p .",
-    "install-lib": "cd remaneVariables && npm install",
-    "update-lib": "cd remaneVariables && npm run install",
+    "install-lib": "cd trigger-release && npm install",
+    "update-lib": "cd trigger-release && npm run install",
     "test": "npm run compile && mocha tests/_suite.js",
     "update": "ncu -u && npm install"
   },

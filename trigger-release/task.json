@@ -1,8 +1,8 @@
 {
-  "id": "70a5ac8e-3360-4c3e-a4b7-95de34bdad49",
-  "name": "remaneVariables",
-  "friendlyName": "Rename variables.",
-  "description": "Rename variables by replacing the characters in it name. Cross platform (work on Windows/Linux/Mac)",
+  "id": "c704915c-1f6c-4237-9edd-4330da1ad3e6",
+  "name": "trigger-release",
+  "friendlyName": "Trigger a Release.",
+  "description": "Trigger a Release by replacing the characters in it name. Cross platform (work on Windows/Linux/Mac)",
   "helpMarkDown": "[More Information](https://github.com/baoduy/azure-devops-rename-variables)",
   "category": "Utility",
   "visibility": ["Build", "Release"],
@@ -12,7 +12,7 @@
     "Minor": 0,
     "Patch": 3
   },
-  "instanceNameFormat": "Rename variables",
+  "instanceNameFormat": "Trigger a Release",
   "inputs": [
     {
       "name": "replaceInput",

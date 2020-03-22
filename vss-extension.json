@@ -1,9 +1,9 @@
 {
   "manifestVersion": 1,
-  "id": "remaneVariables",
-  "version": "1.0.4",
-  "name": "Rename variables.",
-  "description": "Rename variables by find and replace characters. Cross platform (work on Windows/Linux/Mac)",
+  "id": "trigger-release",
+  "version": "0.0.0",
+  "name": "Trigger a Release.",
+  "description": "Trigger a Release by find and replace characters. Cross platform (work on Windows/Linux/Mac)",
   "publisher": "Duy",
   "public": true,
   "icons": {
@@ -30,16 +30,16 @@
   },
   "files": [
     {
-      "path": "remaneVariables"
+      "path": "trigger-release"
     }
   ],
   "contributions": [
     {
-      "id": "remaneVariables",
+      "id": "trigger-release",
       "targets": ["ms.vss-distributed-task.tasks"],
       "type": "ms.vss-distributed-task.task",
       "properties": {
-        "name": "remaneVariables"
+        "name": "trigger-release"
       }
     }
   ]

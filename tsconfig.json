@@ -1,10 +1,7 @@
 {
-    "compilerOptions": {
-        "target": "ES6",
-        "module": "commonjs"
-    },
-    "exclude": [
-    "node_modules",
-    "remaneVariables/node_modules"
-  ]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs"
+  },
+  "exclude": ["node_modules", "trigger-release/node_modules"]
 }
