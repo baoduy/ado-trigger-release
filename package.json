@@ -1,0 +1,26 @@
+{
+  "name": "vstsexttask",
+  "private": true,
+  "version": "99.99.99",
+  "scripts": {
+    "package": "npm run clean  && npm run compile  && tfx extension create --rev-version",
+    "publish": "tfx extension publish --no-wait-validation --token $TOKEN",
+    "publish-local": "tfx extension publish --no-wait-validation",
+    "clean": "rimraf ./*.vsix",
+    "compile": "tsc -p .",
+    "install-lib": "cd remaneVariables && npm install",
+    "update-lib": "cd remaneVariables && npm run install",
+    "test": "npm run compile && mocha tests/_suite.js",
+    "update": "ncu -u && npm install"
+  },
+  "devDependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.9.2",
+    "azure-pipelines-task-lib": "^2.9.3",
+    "minimist": ">=1.2.5",
+    "mocha": "^7.1.1",
+    "sync-request": "^6.1.0",
+    "tfx-cli": "^0.7.11",
+    "typescript": "3.8.3"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "manifestVersion": 1,
+  "id": "remaneVariables",
+  "version": "1.0.4",
+  "name": "Rename variables.",
+  "description": "Rename variables by find and replace characters. Cross platform (work on Windows/Linux/Mac)",
+  "publisher": "Duy",
+  "public": true,
+  "icons": {
+    "default": "static/images/icon.png"
+  },
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "tags": ["Azure Pipelines"],
+  "categories": ["Azure Pipelines"],
+  "content": {
+    "license": {
+      "path": "license.md"
+    },
+    "details": {
+      "path": "README.md"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/baoduy/azure-devops-rename-variables"
+  },
+  "files": [
+    {
+      "path": "remaneVariables"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "remaneVariables",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "type": "ms.vss-distributed-task.task",
+      "properties": {
+        "name": "remaneVariables"
+      }
+    }
+  ]
+}
