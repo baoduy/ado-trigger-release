@@ -22,7 +22,8 @@ class default_1 {
             const authHandler = azure_devops_node_api_1.getPersonalAccessTokenHandler(this.options.pat);
             this._api = new azure_devops_node_api_1.WebApi(this.options.azureDevOpsUri, authHandler);
             const connData = yield this._api.connect();
-            console.log(`Connected using: ${connData.authenticatedUser.providerDisplayName}.`, connData);
+            console.log(`Connected using: ${connData.authenticatedUser.customDisplayName ||
+                connData.authenticatedUser.providerDisplayName}.`);
             return this._api;
         });
     }

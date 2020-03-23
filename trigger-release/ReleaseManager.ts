@@ -39,7 +39,10 @@ export default class implements IReleaseManager {
     this._api = new WebApi(this.options.azureDevOpsUri, authHandler);
 
     const connData = await this._api.connect();
-    console.log(`Connected using: ${connData.authenticatedUser.providerDisplayName}.`, connData);
+    console.log(
+      `Connected using: ${connData.authenticatedUser.customDisplayName ||
+        connData.authenticatedUser.providerDisplayName}.`
+    );
 
     return this._api;
   }

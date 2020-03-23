@@ -15,7 +15,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('Running trigger-release');
         try {
-            const releaseDefinitionId = task.getInput('releaseIdInput', true);
+            const releaseDefinitionId = task.getInput('TargetDefinition', true);
             const environments = task.getInput('releaseStagesInput', true).split(',');
             const options = {
                 azureDevOpsUri: task.getVariable('system.TeamFoundationServerUri'),

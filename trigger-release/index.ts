@@ -11,7 +11,7 @@ async function run() {
   console.log('Running trigger-release');
 
   try {
-    const releaseDefinitionId = task.getInput('releaseIdInput', true);
+    const releaseDefinitionId = task.getInput('TargetDefinition', true);
     const environments = task.getInput('releaseStagesInput', true).split(',');
 
     const options: Options = {
