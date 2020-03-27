@@ -67,6 +67,7 @@ describe('Test trigger-release', function() {
     this.timeout(10000);
 
     assert.equal(match.isMatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
+    assert.equal(match.isMatch('sg-dv1', 'sg-dv1'), true, 'sg-dv1 should matched with sg-dv1');
     assert.equal(match.isMatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
     assert.equal(match.isMatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
     assert.equal(match.isMatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');

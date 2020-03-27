@@ -74,10 +74,7 @@ export default class implements IReleaseManager {
     if (!item) throw `The release ${release} is not found.`;
 
     //Find environment
-    const environment = item.environments.find(e => {
-      const n = e.name.toLowerCase();
-      return n === env || match.isMatch(n, env);
-    });
+    const environment = item.environments.find(e => match.isMatch(e.name.toLowerCase(), env));
     if (!environment) throw `The environment ${env.toUpperCase()} is not found.`;
 
     //Re-deploy the Release
