@@ -7,7 +7,7 @@ import {
 import { WebApi, getPersonalAccessTokenHandler } from 'azure-devops-node-api';
 
 import { IReleaseApi } from 'azure-devops-node-api/ReleaseApi';
-import match from 'wildcard-match';
+import match from 'micromatch';
 
 export interface Options {
   azureDevOpsUri: string;
@@ -67,15 +67,17 @@ export default class implements IReleaseManager {
   }
 
   public async deploy(release: Release | number, env: string) {
+    env = env.toLowerCase();
     const api = await this.getReleaseApi();
     const item = typeof release === 'number' ? await this.getRelease(release) : release;
 
     if (!item) throw `The release ${release} is not found.`;
 
     //Find environment
-    const environment = item.environments.find(
-      e => e.name.toLowerCase() === env.toLowerCase() || match(e.name.toLowerCase(), env.toLowerCase())
-    );
+    const environment = item.environments.find(e => {
+      const n = e.name.toLowerCase();
+      return n === env || match.isMatch(n, env);
+    });
     if (!environment) throw `The environment ${env.toUpperCase()} is not found.`;
 
     //Re-deploy the Release

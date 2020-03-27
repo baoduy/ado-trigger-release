@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const assert = __importStar(require("assert"));
 const ReleaseManager_1 = __importDefault(require("../ReleaseManager"));
-const wildcard_match_1 = __importDefault(require("wildcard-match"));
+const micromatch_1 = __importDefault(require("micromatch"));
 const manager = new ReleaseManager_1.default({
     azureDevOpsUri: 'https://dev.azure.com/drunkcoding/',
     pat: '3plilhh2en44cdlskecwf33u77puiznqgqyejalqd5in6tx57tha',
@@ -54,9 +54,12 @@ describe('Test trigger-release', function () {
             done();
         });
     });
-    it('Test wildcard-match dv1 func', function (done) {
+    it('Test micromatch func', function (done) {
         this.timeout(10000);
-        assert.equal(wildcard_match_1.default('*-dv1', 'sg-dv1'), true, '*-dv1 should be matched with sg-dv1');
+        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
+        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
+        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
+        assert.equal(micromatch_1.default.isMatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');
         done();
     });
 });

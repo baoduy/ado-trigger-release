@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ReleaseInterfaces_1 = require("azure-devops-node-api/interfaces/ReleaseInterfaces");
 const azure_devops_node_api_1 = require("azure-devops-node-api");
-const wildcard_match_1 = __importDefault(require("wildcard-match"));
+const micromatch_1 = __importDefault(require("micromatch"));
 class default_1 {
     constructor(options) {
         this.options = options;
@@ -55,12 +55,16 @@ class default_1 {
     }
     deploy(release, env) {
         return __awaiter(this, void 0, void 0, function* () {
+            env = env.toLowerCase();
             const api = yield this.getReleaseApi();
             const item = typeof release === 'number' ? yield this.getRelease(release) : release;
             if (!item)
                 throw `The release ${release} is not found.`;
             //Find environment
-            const environment = item.environments.find(e => e.name.toLowerCase() === env.toLowerCase() || wildcard_match_1.default(e.name.toLowerCase(), env.toLowerCase()));
+            const environment = item.environments.find(e => {
+                const n = e.name.toLowerCase();
+                return n === env || micromatch_1.default.isMatch(n, env);
+            });
             if (!environment)
                 throw `The environment ${env.toUpperCase()} is not found.`;
             //Re-deploy the Release
