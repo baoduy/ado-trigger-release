@@ -61,10 +61,7 @@ class default_1 {
             if (!item)
                 throw `The release ${release} is not found.`;
             //Find environment
-            const environment = item.environments.find(e => {
-                const n = e.name.toLowerCase();
-                return n === env || micromatch_1.default.isMatch(n, env);
-            });
+            const environment = item.environments.find(e => micromatch_1.default.isMatch(e.name.toLowerCase(), env));
             if (!environment)
                 throw `The environment ${env.toUpperCase()} is not found.`;
             //Re-deploy the Release

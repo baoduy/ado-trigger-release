@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "trigger-release",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "Trigger a Release.",
   "description": "Trigger a Release by find and replace characters. Cross platform (work on Windows/Linux/Mac)",
   "publisher": "Duy",
