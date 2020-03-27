@@ -23,8 +23,13 @@ async function run() {
     const manager = new ReleaseManager(options);
 
     environments.forEach(async env => {
-      const rs = await manager.reDeploy(Number(releaseDefinitionId), env);
-      console.log(`The ${rs.name} of ${rs.releaseDefinition.name} had been scheduled.`);
+      try {
+        const rs = await manager.reDeploy(Number(releaseDefinitionId), env);
+        console.log(`The ${rs.name} of ${rs.releaseDefinition.name} had been scheduled.`);
+      } catch (ex) {
+        console.error(ex);
+        task.setResult(task.TaskResult.Failed, ex);
+      }
     });
 
     task.setResult(task.TaskResult.Succeeded, '', true);

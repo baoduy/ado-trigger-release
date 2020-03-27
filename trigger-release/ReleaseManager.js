@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const ReleaseInterfaces_1 = require("azure-devops-node-api/interfaces/ReleaseInterfaces");
 const azure_devops_node_api_1 = require("azure-devops-node-api");
+const wildcard_match_1 = __importDefault(require("wildcard-match"));
 class default_1 {
     constructor(options) {
         this.options = options;
@@ -56,7 +60,7 @@ class default_1 {
             if (!item)
                 throw `The release ${release} is not found.`;
             //Find environment
-            const environment = item.environments.find(e => e.name.toLowerCase() === env.toLowerCase());
+            const environment = item.environments.find(e => e.name.toLowerCase() === env.toLowerCase() || wildcard_match_1.default(e.name.toLowerCase(), env.toLowerCase()));
             if (!environment)
                 throw `The environment ${env.toUpperCase()} is not found.`;
             //Re-deploy the Release

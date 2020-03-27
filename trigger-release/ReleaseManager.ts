@@ -7,6 +7,7 @@ import {
 import { WebApi, getPersonalAccessTokenHandler } from 'azure-devops-node-api';
 
 import { IReleaseApi } from 'azure-devops-node-api/ReleaseApi';
+import match from 'wildcard-match';
 
 export interface Options {
   azureDevOpsUri: string;
@@ -72,7 +73,9 @@ export default class implements IReleaseManager {
     if (!item) throw `The release ${release} is not found.`;
 
     //Find environment
-    const environment = item.environments.find(e => e.name.toLowerCase() === env.toLowerCase());
+    const environment = item.environments.find(
+      e => e.name.toLowerCase() === env.toLowerCase() || match(e.name.toLowerCase(), env.toLowerCase())
+    );
     if (!environment) throw `The environment ${env.toUpperCase()} is not found.`;
 
     //Re-deploy the Release
