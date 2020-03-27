@@ -1,7 +1,7 @@
 import * as assert from 'assert';
+import * as minimatch from 'minimatch';
 
 import ReleaseManager from '../ReleaseManager';
-import match from 'micromatch';
 
 import tsk = require('azure-pipelines-task-lib/mock-test');
 
@@ -66,11 +66,11 @@ describe('Test trigger-release', function() {
   it('Test micromatch func', function(done: MochaDone) {
     this.timeout(10000);
 
-    assert.equal(match.isMatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
-    assert.equal(match.isMatch('sg-dv1', 'sg-dv1'), true, 'sg-dv1 should matched with sg-dv1');
-    assert.equal(match.isMatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
-    assert.equal(match.isMatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
-    assert.equal(match.isMatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');
+    assert.equal(minimatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
+    assert.equal(minimatch('sg-dv1', 'sg-dv1'), true, 'sg-dv1 should matched with sg-dv1');
+    assert.equal(minimatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
+    assert.equal(minimatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
+    assert.equal(minimatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');
 
     done();
   });

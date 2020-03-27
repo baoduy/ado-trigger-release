@@ -1,18 +1,8 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const assert = __importStar(require("assert"));
-const ReleaseManager_1 = __importDefault(require("../ReleaseManager"));
-const micromatch_1 = __importDefault(require("micromatch"));
+const assert = require("assert");
+const minimatch = require("minimatch");
+const ReleaseManager_1 = require("../ReleaseManager");
 const manager = new ReleaseManager_1.default({
     azureDevOpsUri: 'https://dev.azure.com/drunkcoding/',
     pat: '3plilhh2en44cdlskecwf33u77puiznqgqyejalqd5in6tx57tha',
@@ -56,11 +46,11 @@ describe('Test trigger-release', function () {
     });
     it('Test micromatch func', function (done) {
         this.timeout(10000);
-        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
-        assert.equal(micromatch_1.default.isMatch('sg-dv1', 'sg-dv1'), true, 'sg-dv1 should matched with sg-dv1');
-        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
-        assert.equal(micromatch_1.default.isMatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
-        assert.equal(micromatch_1.default.isMatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');
+        assert.equal(minimatch('sg-dv1', '*dv1'), true, '*dv1 should matched with sg-dv1');
+        assert.equal(minimatch('sg-dv1', 'sg-dv1'), true, 'sg-dv1 should matched with sg-dv1');
+        assert.equal(minimatch('sg-dv1', '*-dv1'), true, '*-dv1 should matched with sg-dv1');
+        assert.equal(minimatch('sg-dv1', '*dv*'), true, '*-dv1 should matched with sg-dv1');
+        assert.equal(minimatch('sg-dv1', 'dv1*'), false, 'dv1* should not matched with sg-dv1');
         done();
     });
 });

@@ -1,3 +1,5 @@
+import * as minimatch from 'minimatch';
+
 import {
   EnvironmentStatus,
   Release,
@@ -7,7 +9,6 @@ import {
 import { WebApi, getPersonalAccessTokenHandler } from 'azure-devops-node-api';
 
 import { IReleaseApi } from 'azure-devops-node-api/ReleaseApi';
-import match from 'micromatch';
 
 export interface Options {
   azureDevOpsUri: string;
@@ -74,7 +75,7 @@ export default class implements IReleaseManager {
     if (!item) throw `The release ${release} is not found.`;
 
     //Find environment
-    const environment = item.environments.find(e => match.isMatch(e.name.toLowerCase(), env));
+    const environment = item.environments.find(e => minimatch(e.name.toLowerCase(), env));
     if (!environment) throw `The environment ${env.toUpperCase()} is not found.`;
 
     //Re-deploy the Release
