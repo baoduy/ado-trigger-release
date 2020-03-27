@@ -22,17 +22,21 @@ async function run() {
 
     const manager = new ReleaseManager(options);
 
+    let hasError = false;
+    //Try to deploy all environments.
     environments.forEach(async env => {
       try {
         const rs = await manager.reDeploy(Number(releaseDefinitionId), env);
         console.log(`The ${rs.name} of ${rs.releaseDefinition.name} had been scheduled.`);
       } catch (ex) {
         console.error(ex);
-        task.setResult(task.TaskResult.Failed, ex);
+        hasError = true;
       }
     });
 
-    task.setResult(task.TaskResult.Succeeded, '', true);
+    if (hasError)
+      task.setResult(task.TaskResult.Failed, 'The release tasks had failed with some errors.', true);
+    else task.setResult(task.TaskResult.Succeeded, '', true);
   } catch (err) {
     console.error(err);
     task.setResult(task.TaskResult.Failed, err);
