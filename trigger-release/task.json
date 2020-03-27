@@ -3,7 +3,7 @@
   "name": "trigger-release",
   "friendlyName": "Trigger a Release.",
   "description": "Trigger a Release by replacing the characters in it name. Cross platform (work on Windows/Linux/Mac)",
-  "helpMarkDown": "[More Information](https://github.com/baoduy/azure-devops-rename-variables)",
+  "helpMarkDown": "[More Information](https://github.com/baoduy/ado-trigger-release)",
   "category": "Utility",
   "visibility": ["Build", "Release"],
   "author": "Duy",

@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "uri": "https://github.com/baoduy/azure-devops-rename-variables"
+    "uri": "https://github.com/baoduy/ado-trigger-release"
   },
   "files": [
     {
